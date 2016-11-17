@@ -1,0 +1,45 @@
+group 'com.jeanboy.webapp'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+// 指定JDK版本
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext {
+    springVersion = "4.3.4.RELEASE"
+    hibernateVersion = "5.2.4.Final"
+    fileuploadVersion = "1.3.2"
+    mysqlConnectorVersion = "5.1.40"
+    c3p0Version = "0.9.1.2"
+    log4jVersion = "2.7"
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    compile 'javax.servlet:jstl:1.2'
+    compile("org.springframework:spring-context:$springVersion",
+            "org.springframework:spring-webmvc:$springVersion",
+            "org.springframework:spring-orm:$springVersion")
+
+    compile "commons-fileupload:commons-fileupload:$fileuploadVersion"
+
+    compile "mysql:mysql-connector-java:$mysqlConnectorVersion"
+    compile "org.hibernate:hibernate-core:$hibernateVersion"
+    compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
+    compile "c3p0:c3p0:$c3p0Version"
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: "$log4jVersion"
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: "$log4jVersion"
+}
+task copyJars(type: Copy) {
+    from configurations.compile
+    into 'src/main/webapp/WEB-INF/lib' //目标位置
+}
