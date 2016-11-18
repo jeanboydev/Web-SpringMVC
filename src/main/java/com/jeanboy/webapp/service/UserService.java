@@ -9,7 +9,10 @@ import java.util.List;
  */
 public interface UserService {
 
-    public void saveUsers(List<User> us);
+    public void saveUser(User user);
 
     public List<User> getAllUserNames();
+
+
+    User getById(int id);
 }

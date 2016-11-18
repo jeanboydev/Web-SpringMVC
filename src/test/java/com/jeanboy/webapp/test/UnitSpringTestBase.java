@@ -9,21 +9,21 @@ import org.springframework.util.StringUtils;
 /**
  * Created by Next on 2016/11/16.
  */
-public class UnitTestBase {
+public class UnitSpringTestBase {
     private ClassPathXmlApplicationContext context;
     private String springXmlPath;
 
-    public UnitTestBase() {
+    public UnitSpringTestBase() {
     }
 
-    public UnitTestBase(String springXmlPath) {
+    public UnitSpringTestBase(String springXmlPath) {
         this.springXmlPath = springXmlPath;
     }
 
     @Before
     public void before() {
         if (StringUtils.isEmpty(springXmlPath)) {
-            springXmlPath = "classpath*:spring-*.xml";
+            springXmlPath = "WEB-INF/config/spring-*.xml";
         }
         try {
             context = new ClassPathXmlApplicationContext(springXmlPath.split("[,\\s]+"));

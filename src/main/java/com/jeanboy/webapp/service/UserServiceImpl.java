@@ -18,13 +18,18 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    public void saveUsers(List<User> us) {
-        for (User u : us) {
-            userDao.save(u);
-        }
+    @Override
+    public void saveUser(User user) {
+        userDao.save(user);
     }
 
+    @Override
     public List<User> getAllUserNames() {
         return userDao.findAll();
+    }
+
+    @Override
+    public User getById(int id) {
+        return userDao.getById(id);
     }
 }
