@@ -1,15 +1,20 @@
 package com.jeanboy.webapp.entity;
 
+import org.hibernate.annotations.Cache;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+import static org.hibernate.annotations.CacheConcurrencyStrategy.READ_WRITE;
+
 /**
  * Created by Next on 2016/11/17.
  */
 @Entity
+@Cache(usage = READ_WRITE,region = "com.jeanboy.webapp.entity.User")
 @Table
 public class User implements Serializable {
 
