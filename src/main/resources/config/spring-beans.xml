@@ -7,23 +7,22 @@
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-
-    <!--开启依赖注入功能-->
+    <!--开启Spring注解-->
     <context:annotation-config/>
-
+    
     <!--打开AOP注解支持-->
     <aop:aspectj-autoproxy/>
 
-    <!--添加组成扫描,排除被SpringMVC包含的过滤注解-->
-    <context:component-scan base-package="com.jeanboy.webapp" use-default-filters="false">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <context:exclude-filter type="annotation"
-                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
-    </context:component-scan>
+    <!--扫描Spring注解并注入-->
+    <context:component-scan base-package="com.jeanboy.webapp"/>
 
-    <!--Hibernate整合扫描-->
-    <context:component-scan base-package="com.jeanboy.webapp.entity"/>
-    <context:component-scan base-package="com.jeanboy.webapp.dao"/>
-    <context:component-scan base-package="com.jeanboy.webapp.service"/>
+
+
+    <!--<bean id="userDao" class="com.jeanboy.webapp.dao.impl.UserDaoImpl"></bean>-->
+    <!--<bean id="userService" class="com.jeanboy.webapp.service.impl.UserServiceImpl"></bean>-->
+
+
+    <bean id="myInterceptor" class="com.jeanboy.webapp.service.MyInterceptor"/>
+
 
 </beans>

@@ -1,11 +1,9 @@
 package com.jeanboy.webapp.test;
 
 import com.jeanboy.webapp.entity.User;
-import com.jeanboy.webapp.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class DbTest {
 
-    @Autowired
-    private UserService userService;
+//    @Autowired
+//    private UserService userService;
 
     @Test
     public void testSaveUser() {
@@ -27,6 +25,6 @@ public class DbTest {
         user.setPassword("test1pass");
         user.setAge(18);
         user.setAddress("北京昌平区");
-        userService.saveUser(user);
+//        userService.saveUser(user);
     }
 }

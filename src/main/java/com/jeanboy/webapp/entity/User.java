@@ -21,6 +21,16 @@ public class User implements Serializable {
     private int age;
     private String address;
 
+    public User() {
+    }
+
+    public User(String username, String password, int age, String address) {
+        this.username = username;
+        this.password = password;
+        this.age = age;
+        this.address = address;
+    }
+
     public int getId() {
         return id;
     }
@@ -59,5 +69,16 @@ public class User implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Created by Next on 2016/11/17.
  */
-@Controller
+@Controller//标注控制层组件
 @RequestMapping("/test")
 public class TestController {
 

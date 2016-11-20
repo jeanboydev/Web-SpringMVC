@@ -10,15 +10,15 @@
     <!--配置数据库-->
     <context:property-placeholder location="classpath*:config/database.properties"/>
 
-    <!--使用C3P0数据源，MySQL数据库-->
+    <!--使用c3p0数据源，MySQL数据库-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="${driverClassName}"/>
         <property name="jdbcUrl" value="${url}"/>
         <property name="user" value="${username}"/>
         <property name="password" value="${password}"/>
+        <property name="initialPoolSize" value="1"/>
         <property name="maxPoolSize" value="40"/>
         <property name="minPoolSize" value="1"/>
-        <property name="initialPoolSize" value="1"/>
         <property name="maxIdleTime" value="20"/>
     </bean>
 
@@ -31,18 +31,19 @@
             <props>
                 <!-- 数据库的方言 -->
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
             </props>
         </property>
     </bean>
-    <!--配置hibernate事物管理器-->
+
+    <!--配置hibernate事务管理器-->
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <!-- 对数据源进行事务管理 -->
+    <!-- 开启Spring注解事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
 </beans>

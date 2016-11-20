@@ -11,22 +11,22 @@ import org.springframework.util.StringUtils;
  */
 public class UnitSpringTestBase {
     private ClassPathXmlApplicationContext context;
-    private String springXmlPath;
+    private String[] springXmlPath;
 
     public UnitSpringTestBase() {
     }
 
-    public UnitSpringTestBase(String springXmlPath) {
+    public UnitSpringTestBase(String... springXmlPath) {
         this.springXmlPath = springXmlPath;
     }
 
     @Before
     public void before() {
         if (StringUtils.isEmpty(springXmlPath)) {
-            springXmlPath = "WEB-INF/config/spring-*.xml";
+            springXmlPath[0] = "classpath*:/config/spring-*.xml";
         }
         try {
-            context = new ClassPathXmlApplicationContext(springXmlPath.split("[,\\s]+"));
+            context = new ClassPathXmlApplicationContext(springXmlPath);
             context.start();
         } catch (BeansException e) {
             e.printStackTrace();
