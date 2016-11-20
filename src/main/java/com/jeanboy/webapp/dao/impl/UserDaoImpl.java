@@ -48,6 +48,7 @@ public class UserDaoImpl implements UserDao {
         System.out.println("=====userDao==deleteById==");
     }
 
+    @Transactional(propagation = Propagation.NOT_SUPPORTED,readOnly = true)
     @Override
     public List<User> getUsers() {
         return sessionFactory.getCurrentSession().createQuery("from user").list();

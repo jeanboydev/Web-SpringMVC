@@ -2,10 +2,7 @@ package com.jeanboy.webapp.entity;
 
 import org.hibernate.annotations.Cache;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 import static org.hibernate.annotations.CacheConcurrencyStrategy.READ_WRITE;
@@ -44,6 +41,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    @Column(length = 20,nullable = false)
     public String getUsername() {
         return username;
     }
