@@ -38,14 +38,14 @@
     </bean>
 
     <!--异常处理-->
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <property name="exceptionMappings">
-            <props>
-                <prop key="Exception">ExceptionPage</prop>
-            </props>
-        </property>
-        <property name="defaultErrorView" value="error"/>
-    </bean>
+    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+        <!--<property name="exceptionMappings">-->
+            <!--<props>-->
+                <!--<prop key="Exception">ExceptionPage</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+        <!--<property name="defaultErrorView" value="error"/>-->
+    <!--</bean>-->
 
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <!--<bean id="mappingJacksonHttpMessageConverter"-->
