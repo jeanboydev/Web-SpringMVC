@@ -23,13 +23,15 @@
 
     <!-- 配置注解 -->
     <mvc:annotation-driven>
+        <!--解决响应中文乱码-->
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <property name="supportedMediaTypes">
-                    <util:list>
-                        <value>application/json;charset=UTF-8</value>
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
                         <value>text/html;charset=UTF-8</value>
-                    </util:list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
                 </property>
             </bean>
         </mvc:message-converters>

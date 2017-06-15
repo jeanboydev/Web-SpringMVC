@@ -27,7 +27,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void save(User user) {
         Session session = sessionFactory.getCurrentSession();//取到当前管理的session
-        session.save(user);//持久化
+        session.persist(user);//持久化
+        /**
+         * session.save();
+         * session.saveOrUpdate();
+         */
         System.out.println("=====userDao==save==" + user.getId());
     }
 
