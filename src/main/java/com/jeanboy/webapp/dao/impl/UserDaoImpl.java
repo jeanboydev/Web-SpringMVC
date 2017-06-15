@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
@@ -23,16 +26,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void save(User user) {
-        Session session=sessionFactory.getCurrentSession();//取到当前管理的session
-        session.persist(user);//持久化
-        System.out.println("=====userDao==save==");
+        Session session = sessionFactory.getCurrentSession();//取到当前管理的session
+        session.save(user);//持久化
+        System.out.println("=====userDao==save==" + user.getId());
     }
 
-    @Transactional(propagation = Propagation.NOT_SUPPORTED,readOnly = true)
+    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
     @Override
     public User getById(int id) {
         System.out.println("=====userDao==getById==");
-        return sessionFactory.getCurrentSession().get(User.class,id);
+        return sessionFactory.getCurrentSession().get(User.class, id);
     }
 
     @Override
@@ -44,13 +47,19 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteById(int id) {
         sessionFactory.getCurrentSession().delete(
-                sessionFactory.getCurrentSession().load(User.class,id));
+                sessionFactory.getCurrentSession().load(User.class, id));
         System.out.println("=====userDao==deleteById==");
     }
 
-    @Transactional(propagation = Propagation.NOT_SUPPORTED,readOnly = true)
+    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
     @Override
     public List<User> getUsers() {
-        return sessionFactory.getCurrentSession().createQuery("from user").list();
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> from = query.from(User.class);
+        query.select(from);
+//        query.orderBy(builder.asc(from.get("age")));
+        return session.createQuery(query).getResultList();
     }
 }

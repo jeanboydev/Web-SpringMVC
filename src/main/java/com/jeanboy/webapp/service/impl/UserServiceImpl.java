@@ -14,8 +14,13 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
 
-    @Autowired //@Qualifier("userDao")
-    private UserDao userDao;
+    //@Qualifier("userDao")
+    private final UserDao userDao;
+
+    @Autowired
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Override
     public void save(User user) {
