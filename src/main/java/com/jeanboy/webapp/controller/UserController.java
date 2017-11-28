@@ -1,8 +1,9 @@
 package com.jeanboy.webapp.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.jeanboy.webapp.domain.service.UserService;
 import com.jeanboy.webapp.entity.User;
-import com.jeanboy.webapp.service.UserService;
+import com.jeanboy.webapp.entity.UserBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +30,9 @@ public class UserController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "text/json;charset=UTF-8")
     @ResponseBody
-    public String getUserById(@PathVariable("id") Integer id) {
+    public String getUserById(@PathVariable("id") Long id) {
         if (id != null) {
-            User user = userService.getById(id);
+            UserBean user = userService.load(id);
             return JSON.toJSONString(user);
         }
         return "id != null";
@@ -48,7 +49,7 @@ public class UserController {
     @ResponseBody
     public String saveUser(@RequestParam(value = "username") String username,
                            @RequestParam(value = "password") String password) {
-        User user = new User();
+        UserBean user = new UserBean();
         user.setUsername(username);
         user.setPassword(password);
         userService.save(user);

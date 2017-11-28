@@ -21,9 +21,8 @@
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
-    <!--Hibernate整合扫描-->
+    <!--Hibernate 整合扫描目录-->
     <context:component-scan base-package="com.jeanboy.webapp.entity"/>
-    <context:component-scan base-package="com.jeanboy.webapp.dao"/>
-    <context:component-scan base-package="com.jeanboy.webapp.service"/>
+    <context:component-scan base-package="com.jeanboy.webapp.domain.*"/>
 
 </beans>

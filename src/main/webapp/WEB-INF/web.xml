@@ -4,6 +4,66 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <!--配置 HiddenHttpMethodFilter过滤器，可将from表单请求转为标准http请求-->
+    <!--<filter>-->
+        <!--<filter-name>hiddenHttpMethodFilter</filter-name>-->
+        <!--<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>hiddenHttpMethodFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <!--使用Spring解决Hibernate因session关闭导致的延迟加载例外问题 -->
+    <!--<filter>-->
+        <!--<filter-name>openSessionInViewFilter</filter-name>-->
+        <!--<filter-class>org.springframework.orm.hibernate5.support.OpenSessionInViewFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>openSessionInViewFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+
+
+    <!--**********************Spring**********************-->
+    <!--配置Spring IOC-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath*:config/spring-core.xml
+            classpath*:config/spring-hibernate.xml
+        </param-value>
+    </context-param>
+
+    <!--配置Spring上下文监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!--防止Spring内存溢出监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+
+    <!--**********************Spring MVC**********************-->
+    <!--配置Spring MVC-->
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath*:config/spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!--**********************数据库**********************-->
     <!--配置编码方式过滤器解决数据库乱码-->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
@@ -22,68 +82,24 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!--配置 HiddenHttpMethodFilter过滤器，可将from表单请求转为标准http请求-->
-    <filter>
-        <filter-name>hiddenHttpMethodFilter</filter-name>
-        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>hiddenHttpMethodFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <!--使用Spring解决Hibernate因session关闭导致的延迟加载例外问题 -->
-    <filter>
-        <filter-name>openSessionInViewFilter</filter-name>
-        <filter-class>org.springframework.orm.hibernate5.support.OpenSessionInViewFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>openSessionInViewFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <!--配置Spring MVC-->
-    <servlet>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath*:config/spring-mvc.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-        <async-supported>true</async-supported>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-
-    <!--配置Spring IOC-->
+    <!--**********************log**********************-->
     <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            classpath*:config/spring-core.xml,
-            classpath*:config/spring-hibernate.xml
-        </param-value>
+        <param-name>logbackConfigLocation</param-name>
+        <param-value>classpath:logback.xml</param-value>
     </context-param>
-
-    <!--配置Spring上下文监听器 -->
     <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <!--防止Spring内存溢出监听器 -->
-    <listener>
-        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+        <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
     </listener>
 
 
+    <!--**********************页面**********************-->
     <!-- 引用js,如果无此配置，则无法对js进行加载 -->
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.js</url-pattern>
     </servlet-mapping>
 
+    <!--**********************启动**********************-->
     <!--启动页-->
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
