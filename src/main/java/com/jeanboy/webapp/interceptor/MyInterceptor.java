@@ -1,4 +1,4 @@
-package com.jeanboy.webapp.service;
+package com.jeanboy.webapp.interceptor;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;

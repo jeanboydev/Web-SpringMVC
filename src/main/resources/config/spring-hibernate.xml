@@ -1,58 +1,58 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd">
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+       <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+       <!--xmlns:context="http://www.springframework.org/schema/context"-->
+       <!--xmlns:tx="http://www.springframework.org/schema/tx"-->
+       <!--xsi:schemaLocation="http://www.springframework.org/schema/beans-->
+        <!--http://www.springframework.org/schema/beans/spring-beans.xsd-->
+        <!--http://www.springframework.org/schema/context-->
+        <!--http://www.springframework.org/schema/context/spring-context.xsd-->
+        <!--http://www.springframework.org/schema/tx-->
+        <!--http://www.springframework.org/schema/tx/spring-tx.xsd">-->
 
-    <!--配置数据库-->
-    <context:property-placeholder location="classpath*:config/database.properties"/>
+    <!--&lt;!&ndash;配置数据库&ndash;&gt;-->
+    <!--<context:property-placeholder location="classpath*:config/database.properties"/>-->
 
-    <!--使用c3p0数据源，MySQL数据库-->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="${driverClassName}"/>
-        <property name="jdbcUrl" value="${url}"/>
-        <property name="user" value="${username}"/>
-        <property name="password" value="${password}"/>
-        <property name="initialPoolSize" value="1"/>
-        <property name="minPoolSize" value="1"/>
-        <property name="maxPoolSize" value="40"/>
-        <property name="maxIdleTime" value="20"/>
-    </bean>
+    <!--&lt;!&ndash;使用c3p0数据源，MySQL数据库&ndash;&gt;-->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">-->
+        <!--<property name="driverClass" value="${driverClassName}"/>-->
+        <!--<property name="jdbcUrl" value="${url}"/>-->
+        <!--<property name="user" value="${username}"/>-->
+        <!--<property name="password" value="${password}"/>-->
+        <!--<property name="initialPoolSize" value="1"/>-->
+        <!--<property name="minPoolSize" value="1"/>-->
+        <!--<property name="maxPoolSize" value="40"/>-->
+        <!--<property name="maxIdleTime" value="20"/>-->
+    <!--</bean>-->
 
-    <!--配置hibernate整合-->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.jeanboy.webapp.entity"/>
-        <!--配置hibernate常用属性-->
-        <property name="hibernateProperties">
-            <props>
-                <!-- 数据库的方言 -->
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.format_sql">true</prop>
-                <!--二级缓存-->
-                <!--<prop key="cache.use_second_level_cache">true</prop>-->
-                <!--<prop key="cache.use_query_cache">false</prop>-->
-                <!--<prop key="cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>-->
-            </props>
-        </property>
+    <!--&lt;!&ndash;配置hibernate整合&ndash;&gt;-->
+    <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+        <!--<property name="packagesToScan" value="com.jeanboy.webapp.entity"/>-->
+        <!--&lt;!&ndash;配置hibernate常用属性&ndash;&gt;-->
+        <!--<property name="hibernateProperties">-->
+            <!--<props>-->
+                <!--&lt;!&ndash; 数据库的方言 &ndash;&gt;-->
+                <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>-->
+                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
+                <!--<prop key="hibernate.show_sql">true</prop>-->
+                <!--<prop key="hibernate.format_sql">true</prop>-->
+                <!--&lt;!&ndash;二级缓存&ndash;&gt;-->
+                <!--&lt;!&ndash;<prop key="cache.use_second_level_cache">true</prop>&ndash;&gt;-->
+                <!--&lt;!&ndash;<prop key="cache.use_query_cache">false</prop>&ndash;&gt;-->
+                <!--&lt;!&ndash;<prop key="cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>&ndash;&gt;-->
+            <!--</props>-->
+        <!--</property>-->
 
 
-    </bean>
+    <!--</bean>-->
 
-    <!--配置hibernate事务管理器-->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
+    <!--&lt;!&ndash;配置hibernate事务管理器&ndash;&gt;-->
+    <!--<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">-->
+        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
+    <!--</bean>-->
 
-    <!-- 开启Spring注解事务 -->
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!--&lt;!&ndash; 开启Spring注解事务 &ndash;&gt;-->
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
 
-</beans>
+<!--</beans>-->
